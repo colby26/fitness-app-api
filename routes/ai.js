@@ -10,9 +10,11 @@ const openai = new OpenAI({
 router.post('/chat', async (req, res) => {
     const { message } = req.body;
     try {
-        const response = await openai.createChatCompletion({
-            model: "gpt-4",
-            messages: [{ role: "user", content: message }]
+        const response = await openai.chat.completions.create({
+  	   model: "gpt-4",
+           messages: [{ role: "user", content: message }]
+           });
+
         });
         res.json({ reply: response.data.choices[0].message.content });
     } catch (err) {
